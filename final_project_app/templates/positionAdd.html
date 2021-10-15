@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/style.css')}}">
+
+    <title>Position Add Page</title>
+
+    <style>
+        .alert-dismissable .close,
+        .alert-dismissible .close {
+            top: -7px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SECTION: For displaying messages to users -->
+
+    <div class="errorMessages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages: %}
+
+        {% for category, message in messages: %}
+
+        <div class="alert alert-{{category}} alert-dismissible fade in messageOut">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Important info!</strong> {{message}}.
+        </div>
+
+        {% endfor %}
+
+        {% endif %}
+
+        {% endwith %}
+    </div>
+
+    <!--   END SECTION     -->
+
+    <!--   MAIN SECTION: Showing dashboard information     -->
+
+    <div class="container">
+
+        <nav class="d-flex flex-row justify-content-between align-items-center my-4 border-bottom border-dark">
+            <h1>{{session['org_name']}}!!!</h1>
+            <h1 class="logo">DevsOnDeck</h1>
+            <div>
+                <a href="/dashboard/organization" class="btn btn-secondary">Go back</a>
+                <button class="btn btn-primary logout">Log out</button>
+            </div>
+        </nav>
+
+        <div class="row bg-primary mb-3">
+
+            <h2 class="ml-4 text-dark">Add A Position</h2>
+
+        </div>
+
+        <form action="" id="frmAddPosition">
+            <input type="hidden" id="idOrg" name="idOrg" value="{{session['id']}}">
+            <input type="hidden" id="frmIdentifier" value=8>
+            <label for="namePos" class="form-label mt-4">Name:</label>
+            <input type="text" id="namePos" name="namePos" class="form-control">
+            <label for="descriptionPos" class="form-label mt-5">Description:</label>
+            <textarea name="descriptionPos" id="descriptionPos" cols="30" rows="7"
+                placeholder="Add more about position here..." class="form-control"></textarea>
+            <label for="skills" class="form-label mt-5">Skills:</label>
+            <div class="row">
+
+                <div class="col-2"></div>
+                <div class="col-8 bg-secondary p-0">
+
+                    <div class="iconLanguages d-flex flex-row flex-wrap justify-content-around p-5">
+                        <div class="d-flex flex-column align-items-center skill">
+                            <i class="fab fa-html5" onclick="oncheck(this);"></i>
+                            <input type="hidden" id="langId1" name="langId" class="langId" value=1>
+                            <p>HTML</p>
+                           
+                        </div>
+                        <div class="d-flex flex-column align-items-center skill">
+                            <i class="fab fa-css3-alt" onclick="oncheck(this);"></i>
+                            <input type="hidden" id="langId2" name="langId" class="langId" value=2>
+                            <p>CSS</p>
+                           
+                        </div>
+                        <div class="d-flex flex-column align-items-center skill">
+                            <i class="fab fa-connectdevelop" onclick="oncheck(this);"></i>
+                            <input type="hidden" id="langId3" name="langId" class="langId" value=3>
+                            <p>Ruby</p>
+                            
+                        </div>
+                        <div class="d-flex flex-column align-items-center skill">
+                            <i class="fab fa-python" onclick="oncheck(this);"></i>
+                            <input type="hidden" id="langId4" name="langId" class="langId" value=4>
+                            <p>Python</p>
+                            
+                        </div>
+                        <div class="d-flex flex-column align-items-center skill">
+                            <i class="fas fa-database" onclick="oncheck(this);"></i>
+                            <input type="hidden" id="langId5" name="langId" class="langId" value=5>
+                            <p>SQL</p>
+                           
+                        </div>
+                        <div class="d-flex flex-column align-items-center skill">
+                            <i class="fab fa-js-square" onclick="oncheck(this);"></i>
+                            <input type="hidden" id="langId6" name="langId" class="langId" value=6>
+                            <p>JavaScript</p>
+                            
+                        </div>
+                        <div class="d-flex flex-column align-items-center skill">
+                            <i class="fab fa-java" onclick="oncheck(this);"></i>
+                            <input type="hidden" id="langId7" name="langId" class="langId" value=7>
+                            <p>Java</p>
+                            
+                        </div>
+                        <div class="d-flex flex-column align-items-center skill">
+                            <i class="far fa-copyright" onclick="oncheck(this);"></i>
+                            <input type="hidden" id="langId8" name="langId" class="langId" value=8>
+                            <p>C++</p>
+                            
+                        </div>
+                        <div class="d-flex flex-column align-items-center skill">
+                            <i class="fab fa-google-plus-g" onclick="oncheck(this);"></i>
+                            <input type="hidden" id="langId9" name="langId" class="langId" value=9>
+                            <p>Google+</p>
+                            
+                        </div>
+                        <div class="d-flex flex-column align-items-center skill">
+                            <i class="fab fa-swift" onclick="oncheck(this);"></i>
+                            <input type="hidden" id="langId10" name="langId" class="langId" value=10>
+                            <p>Swift</p>
+                            
+                        </div>
+                        <div class="d-flex flex-column align-items-center skill">
+                            <i class="fab fa-korvue" onclick="oncheck(this);"></i>
+                            <input type="hidden" id="langId11" name="langId" class="langId" value=11>
+                            <p>Kotlin</p>
+                            
+                        </div>
+                        <div class="d-flex flex-column align-items-center skill">
+                            <i class="fab fa-android" onclick="oncheck(this);"></i>
+                            <input type="hidden" id="langId12" name="langId" class="langId" value=12>
+                            <p>Android</p>
+                            
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-2"></div>
+
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary btn-lg mt-4 mb-2">Add Position</button>
+            </div>
+        </form>
+    </div>
+
+    <!--    END MAIN SECTION     -->
+
+    <script src="{{ url_for('static', filename='./js/script.js') }}"></script>
+
+</body>
+
+</html>

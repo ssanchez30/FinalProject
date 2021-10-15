@@ -1,0 +1,154 @@
+
+.bgRegister {
+    background-image: url('../images/bg3.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+
+}
+
+button:focus{
+    outline: none!important;
+    box-shadow: none!important;
+}
+
+.selectState{
+    height: 34px;
+    width: 100px;
+    border-radius: 5px;
+}
+
+.menu >li:hover{
+    cursor: pointer;
+}
+
+#showConfPassRegister:hover, #showPassRegister:hover, #showPassLogin:hover{
+    cursor: pointer;
+}
+
+i{
+    
+    font-size: 80px;
+    margin: 18px;
+    color: black;
+}
+
+i:hover{
+    cursor: pointer;
+    color: rgb(139, 197, 91);
+}
+
+.iconLanguages{
+    overflow: auto;
+    border: 4px solid black;
+}
+
+textarea{
+    overflow: auto;
+    border: 4px solid black;
+
+}
+
+.icard{
+
+    font-size: 32px;
+    margin: 18px;
+    color: black;
+}
+
+.positionList{
+    font-size: 24px;
+
+}
+
+.positionList:hover{
+    cursor: pointer;
+    color: rgb(139, 197, 91);
+}
+
+.icardBest{
+    font-size: 60px;
+    margin: 0 60px;
+}
+
+
+.iconSelected{
+
+    color: blue;
+
+}
+
+
+
+/*this is for tablets*/
+@media only screen and (min-width:481px) and (max-width: 1023px){  
+  
+    .logo{
+        display: none;
+    }
+
+    .media{
+        display: none;
+    }
+
+    .pmedia{
+        display: flex;
+        flex-direction: column;
+        font-size: small;
+        margin-right: 50px;
+    }
+
+    .iconMedia{
+
+        font-size: 50px;
+    }
+
+    #topFiveSkills{
+        justify-content: center!important;
+    }
+
+    textarea{
+        width: 90%;
+    }
+
+    h2, h3{
+        font-size: 1.875em;
+    }
+
+    .noteMedia{
+        font-size: 90%;
+        padding: 0 25px;
+        
+    }
+    .btnMedia{
+        margin-top: -50px;
+    }
+
+    .frmMedia{
+        margin: 0 100px;
+    }
+}
+
+    
+/*this is for larger screens*/
+@media only screen and (min-width: 1024px){  /*starting 1024px and above*/
+
+
+    .devFrm{
+        padding: 0 350px;
+    }
+
+    .menu{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        color: white;
+        padding: 10px 30px;
+        
+    }
+        
+    .hamburger{
+        display: none;
+    }
+        
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/style.css')}}">
+
+    <title>Position View Page</title>
+
+    <style>
+        .alert-dismissable .close,
+        .alert-dismissible .close {
+            top: -7px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SECTION: For displaying messages to users -->
+
+    <div class="errorMessages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages: %}
+
+        {% for category, message in messages: %}
+
+        <div class="alert alert-{{category}} alert-dismissible fade in messageOut">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Important info!</strong> {{message}}.
+        </div>
+
+        {% endfor %}
+
+        {% endif %}
+
+        {% endwith %}
+    </div>
+
+    <!--   END SECTION     -->
+
+    <!--   MAIN SECTION: Showing dashboard information     -->
+
+    <div class="container">
+
+        <nav class="d-flex flex-row justify-content-between align-items-center my-4 border-bottom border-dark">
+            <h1>DevsOnDeck, {{session['firstname']}}</h1>
+
+            <div>
+                <a href="/dashboard/developer" class="btn btn-secondary">Go back</a>
+                <button class="btn btn-primary logout">Log out</button>
+            </div>
+        </nav>
+
+        <div class="row bg-primary mb-3">
+
+            <h2 class="ml-4 text-dark">Position Detail</h2>
+
+        </div>
+
+        <form action="/position/apply" method="GET">
+            <input type="hidden" id="idOrg" name="idOrg" value="{{session['id']}}">
+            <input type="hidden" id="frmIdentifier" value=9>
+            <label for="namePos" class="form-label mt-4">Name:</label>
+            <input type="text" id="namePos" name="namePos" class="form-control" readonly value="{{detail[0]['name_position']}}">
+            <label for="descriptionPos" class="form-label mt-5">Description:</label>
+            <textarea name="descriptionPos" id="descriptionPos" cols="30" rows="7" readonly
+                placeholder="Add more about position here..."
+                class="form-control">{{detail[0]['descr_position']}}</textarea>
+            <label for="skills" class="form-label mt-5">Skills Required:</label>
+            <div class="row">
+
+                <div class="col-2"></div>
+                <div class="col-8 bg-secondary p-0">
+
+                    <div class="iconLanguages d-flex flex-row flex-wrap justify-content-around p-5">
+
+                        {% for lang in skillsRequired %}
+
+                        {% if lang == 1 %}
+                        <div class="d-flex flex-column align-items-center skill" onclick="select(this);">
+                            <i class="fab fa-html5 iconMedia"></i>
+                            <p>HTML</p>
+                            <input type="hidden" id="langId1" name="langId" class="langId" value=1>
+                        </div>
+                        {% elif lang == 2 %}
+
+                        <div class="d-flex flex-column align-items-center skill" onclick="select(this);">
+                            <i class="fab fa-css3-alt iconMedia"></i>
+                            <p>CSS</p>
+                            <input type="hidden" id="langId2" name="langId" class="langId" value=2>
+                        </div>
+                        {% elif lang == 3 %}
+
+                        <div class="d-flex flex-column align-items-center skill" onclick="select(this);">
+                            <i class="fab fa-connectdevelop iconMedia"></i>
+                            <p>Ruby</p>
+                            <input type="hidden" id="langId3" name="langId" class="langId" value=3>
+                        </div>
+                        {% elif lang == 4 %}
+
+                        <div class="d-flex flex-column align-items-center skill" onclick="select(this);">
+                            <i class="fab fa-python iconMedia"></i>
+                            <p>Python</p>
+                            <input type="hidden" id="langId4" name="langId" class="langId" value=4>
+                        </div>
+                        {% elif lang == 5 %}
+
+                        <div class="d-flex flex-column align-items-center skill" onclick="select(this);">
+                            <i class="fas fa-database iconMedia"></i>
+                            <p>SQL</p>
+                            <input type="hidden" id="langId5" name="langId" class="langId" value=5>
+                        </div>
+                        {% elif lang == 6 %}
+
+                        <div class="d-flex flex-column align-items-center skill" onclick="select(this);">
+                            <i class="fab fa-js-square iconMedia"></i>
+                            <p>JavaScript</p>
+                            <input type="hidden" id="langId6" name="langId" class="langId" value=6>
+                        </div>
+                        {% elif lang == 7 %}
+
+                        <div class="d-flex flex-column align-items-center skill" onclick="select(this);">
+                            <i class="fab fa-java iconMedia"></i>
+                            <p>Java</p>
+                            <input type="hidden" id="langId7" name="langId" class="langId" value=7>
+                        </div>
+                        {% elif lang == 8 %}
+
+                        <div class="d-flex flex-column align-items-center skill" onclick="select(this);">
+                            <i class="far fa-copyright iconMedia"></i>
+                            <p>C++</p>
+                            <input type="hidden" id="langId8" name="langId" class="langId" value=8>
+                        </div>
+                        {% elif lang == 9 %}
+
+                        <div class="d-flex flex-column align-items-center skill" onclick="select(this);">
+                            <i class="fab fa-google-plus-g iconMedia"></i>
+                            <p>Google+</p>
+                            <input type="hidden" id="langId9" name="langId" class="langId" value=9>
+                        </div>
+                        {% elif lang == 10 %}
+
+                        <div class="d-flex flex-column align-items-center skill" onclick="select(this);">
+                            <i class="fab fa-swift iconMedia"></i>
+                            <p>Swift</p>
+                            <input type="hidden" id="langId10" name="langId" class="langId" value=10>
+                        </div>
+                        {% elif lang == 11 %}
+
+                        <div class="d-flex flex-column align-items-center skill" onclick="select(this);">
+                            <i class="fab fa-korvue iconMedia"></i>
+                            <p>Kotlin</p>
+                            <input type="hidden" id="langId11" name="langId" class="langId" value=11>
+                        </div>
+                        {% elif lang == 12 %}
+
+                        <div class="d-flex flex-column align-items-center skill" onclick="select(this);">
+                            <i class="fab fa-android iconMedia"></i>
+                            <p>Android</p>
+                            <input type="hidden" id="langId12" name="langId" class="langId" value=12>
+                        </div>
+
+                        {% else %}
+                        {{lang.lang_name}}
+                        {% endif %}
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+                <div class="col-2"></div>
+
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success btn-lg mt-4 mb-2">Apply for the position</button>
+            </div>
+        </form>
+    </div>
+
+    <!--    END MAIN SECTION     -->
+
+    <script src="{{ url_for('static', filename='./js/script.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/normalize.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/style.css') }}">
+    <title>Organization Login page</title>
+
+    <style>
+        .alert-dismissable .close,
+        .alert-dismissible .close {
+            top: -7px;
+        }
+    </style>
+
+</head>
+
+
+<!--   NAV BAR    -->
+
+<nav class="d-flex flex-row justify-content-between bg-dark">
+
+    <h1 class="text-white pb-3 ml-5"> DevsOnDeck </h1>
+
+    <div class="d-flex flex-row list-group mr-5 menu">
+
+        <a href="/" class="list-group-item bg-dark text-white border-0 align-self-center mt-4"> Reg
+            Dev</a>
+        <a href="/add/organization" class="list-group-item bg-dark text-white border-0 align-self-center mt-4"> Reg
+            Org </a>
+
+        <a href="/loginDeveloper" class="list-group-item bg-dark text-white border-0 align-self-center mt-4"> Dev
+            Login</a>
+        <a href="/loginOrganization" class="list-group-item bg-dark text-white border-0 align-self-center mt-4"> Org
+            Login </a>
+    </div>
+</nav>
+
+<!--  END NAV BAR    -->
+
+
+<!-- SECTION: For displaying messages to users -->
+
+<body>
+
+    <div class="errorMessages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages: %}
+
+        {% for category, message in messages: %}
+
+        <div class="alert alert-{{category}} alert-dismissible fade in messageOut">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Important info!</strong> {{message}}.
+        </div>
+
+        {% endfor %}
+
+        {% endif %}
+
+        {% endwith %}
+    </div>
+
+    <!--   END SECTION     -->
+
+
+    <!--   MAIN SECTION: Register options      -->
+
+
+    <div class="bgRegister">
+
+        <div class="container-fluid d-flex flex-row">
+
+            <!--    MAIN SECTION: Login process       -->
+            <div class="devFrm col-12">
+
+                <form action="/authentication" method="POST" class="bg-dark px-5 frmMedia">
+                    <input type="hidden" id="frmIdentifier" value=11>
+
+                    <h1 class="text-white text-center py-3">Welcome Back!</h1>
+                    <h2 class="text-white text-center">Let's Find You Some Candidates!</h2>
+                    <label for="logEmail" class="form-label text-white">Email:</label>
+                    <input type="email" id="logEmail" name="logEmail" class="form-control mb-3">
+                    <label for="logPass" class="form-label text-white">Password:</label>
+                    <input type="password" id="logPass" name="logPass" class="form-control mb-3">
+                    <small class="text-white float-right" id="showPassLogin">Show</small>
+                    <button type="submit" class="btn btn-success my-4">Login</button>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!--       END OF MAIN SECTION     -->
+    <script src="{{ url_for('static', filename='./js/script.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/style.css')}}">
+
+    <title>Dashboard Developer Page</title>
+
+    <style>
+        .alert-dismissable .close,
+        .alert-dismissible .close {
+            top: -7px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SECTION: For displaying messages to users -->
+
+    <div class="errorMessages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages: %}
+
+        {% for category, message in messages: %}
+
+        <div class="alert alert-{{category}} alert-dismissible fade in messageOut">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Important info!</strong> {{message}}.
+        </div>
+
+        {% endfor %}
+
+        {% endif %}
+
+        {% endwith %}
+    </div>
+
+    <!--   END SECTION     -->
+
+    <!--   MAIN SECTION: Showing dashboard information     -->
+
+    <div class="container">
+
+        <nav class="d-flex flex-row justify-content-between align-items-center my-4 border-bottom border-dark">
+            <h1>DevsOnDeck, {{session['firstname']}}</h1>
+            
+            <div>
+                <input type="hidden" id="frmIdentifier" value=7>
+                <button class="btn btn-primary logout">Log out</button>
+            </div>
+        </nav>
+
+        <div class="row">
+
+            <div class="col-12">
+
+        
+                <div class="d-flex flex-column">
+
+                    <h2 class="text-center">Positions To Fill</h2>
+                    <ul class="list-group positionList">
+
+                        {% for pos in positions %}
+                        <li class="list-group-item"><a
+                                href="/position/PositionView/{{pos.id_position}}">{{pos.name_position}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--    END MAIN SECTION     -->
+
+    <script src="{{ url_for('static', filename='./js/script.js') }}"></script>
+
+</body>
+
+</html>

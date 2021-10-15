@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/style.css')}}">
+
+    <title>Best Fit Position Page</title>
+
+    <style>
+        .alert-dismissable .close,
+        .alert-dismissible .close {
+            top: -7px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SECTION: For displaying messages to users -->
+
+    <div class="errorMessages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages: %}
+
+        {% for category, message in messages: %}
+
+        <div class="alert alert-{{category}} alert-dismissible fade in messageOut">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Important info!</strong> {{message}}.
+        </div>
+
+        {% endfor %}
+
+        {% endif %}
+
+        {% endwith %}
+    </div>
+
+    <!--   END SECTION     -->
+
+    <!--   MAIN SECTION: Showing dashboard information     -->
+
+    <div class="container">
+
+        <nav class="d-flex flex-row justify-content-between align-items-center my-4 border-bottom border-dark">
+            <h1>{{session['org_name']}}</h1>
+            <h1>DevsOnDeck</h1>
+            <div>
+                <input type="hidden" id="frmIdentifier" value=6>
+                <a href="/dashboard/organization" class="btn btn-secondary">Go back</a>
+                <button class="btn btn-primary logout">Log out</button>
+
+            </div>
+        </nav>
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <h2 class="p-3 mt-0 text-center">{{position['position']}}</h2>
+                <h2 class="bg-secondary p-3 mt-0">Available Devs</h2>
+                <div class="d-flex flex-column">
+
+                    {% for dev in developers %}
+                    <div class="card mb-3">
+
+                        <div class="card-body">
+                            <h5 class="card-title d-flex align-items-end justify-content-between">
+                                <a href="/email/{{position['id_position']}}/{{position['position']}}/{{dev.firstname}}/{{dev.lastname}}"><span class="h2">{{dev.firstname}}
+                                        {{dev.lastname}}</span></a>
+                                <div class="d-flex ml-5">
+
+                                    {% for lang in dev.ListOfLanguages %}
+
+                                    {% if lang.id_language == 1 %}
+                                    <div class="d-flex flex-column align-items-center skill">
+                                        <i class="fab fa-html5 icardBest"></i>
+                                        <p>HTML</p>
+                                    </div>
+                                    {% elif lang.id_language == 2 %}
+
+                                    <div class="d-flex flex-column align-items-center skill">
+                                        <i class="fab fa-css3-alt icardBest"></i>
+                                        <p>CSS</p>
+                                    </div>
+                                    {% elif lang.id_language == 3 %}
+
+                                    <div class="d-flex flex-column align-items-center skill">
+                                        <i class="fab fa-connectdevelop icardBest"></i>
+                                        <p>Ruby</p>
+                                    </div>
+                                    {% elif lang.id_language == 4 %}
+
+                                    <div class="d-flex flex-column align-items-center skill">
+                                        <i class="fab fa-python icardBest"></i>
+                                        <p>Python</p>
+                                    </div>
+                                    {% elif lang.id_language == 5 %}
+
+                                    <div class="d-flex flex-column align-items-center skill">
+                                        <i class="fas fa-database icardBest"></i>
+                                        <p>SQL</p>
+                                    </div>
+                                    {% elif lang.id_language == 6 %}
+
+                                    <div class="d-flex flex-column align-items-center skill">
+                                        <i class="fab fa-js-square icardBest"></i>
+                                        <p>JavaScript</p>
+                                    </div>
+                                    {% elif lang.id_language == 7 %}
+
+                                    <div class="d-flex flex-column align-items-center skill">
+                                        <i class="fab fa-java icardBest"></i>
+                                        <p>Java</p>
+                                    </div>
+                                    {% elif lang.id_language == 8 %}
+
+                                    <div class="d-flex flex-column align-items-center skill">
+                                        <i class="far fa-copyright icardBest"></i>
+                                        <p>C++</p>
+                                    </div>
+                                    {% elif lang.id_language == 9 %}
+
+                                    <div class="d-flex flex-column align-items-center skill">
+                                        <i class="fab fa-google-plus-g icardBest"></i>
+                                        <p>Google+</p>
+                                    </div>
+                                    {% elif lang.id_language == 10 %}
+
+                                    <div class="d-flex flex-column align-items-center skill">
+                                        <i class="fab fa-swift icardBest"></i>
+                                        <p>Swift</p>
+                                    </div>
+                                    {% elif lang.id_language == 11 %}
+
+                                    <div class="d-flex flex-column align-items-center skill">
+                                        <i class="fab fa-korvue icardBest"></i>
+                                        <p>Kotlin</p>
+                                    </div>
+                                    {% elif lang.id_language == 12 %}
+
+                                    <div class="d-flex flex-column align-items-center skill">
+                                        <i class="fab fa-android icardBest"></i>
+                                        <p>Android</p>
+                                    </div>
+
+                                    {% else %}
+                                    {{lang.lang_name}}
+                                    {% endif %}
+
+                                    {% endfor %}
+                                </div>
+                            </h5>
+                            <h4 class="card-subtitle ml-4 mb-3 text-muted">Developer</h4>
+                            <p class="card-text">{{dev.biography}}</p>
+
+                            {% for user_nota in notas%}
+                            {% if user_nota['user_id'] == dev.id_user %}
+                            {% if user_nota['nota'] > 79 %}
+                            <p class="bg-success d-inline p-4 float-right text-white rounded"><span>{{user_nota['nota']}}</span>%
+                                Match</p>
+                            {% elif user_nota['nota'] > 59 %}
+                            <p class="bg-warning d-inline p-4 float-right text-white rounded"><span>{{user_nota['nota']}}</span>%
+                                Match</p>
+                            {% else %}
+                            <p class="bg-danger d-inline p-4 float-right text-white rounded"><span>{{user_nota['nota']}}</span>%
+                                Match</p>
+
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <!--    END MAIN SECTION     -->
+
+    <script src="{{ url_for('static', filename='./js/script.js') }}"></script>
+
+</body>
+
+</html>

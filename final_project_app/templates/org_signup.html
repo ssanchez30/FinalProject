@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/normalize.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/style.css') }}">
+    <title>Organization Register page</title>
+
+    <style>
+        .alert-dismissable .close,
+        .alert-dismissible .close {
+            top: -7px;
+        }
+    </style>
+
+</head>
+
+<!--   NAV BAR    -->
+
+<nav class="d-flex flex-row justify-content-between bg-dark">
+
+    <h1 class="text-white pb-3 ml-5"> DevsOnDeck </h1>
+
+    <div class="d-flex flex-row list-group mr-5 menu">
+        <a href="/loginDeveloper" class="list-group-item bg-dark text-white border-0 align-self-center mt-4"> Dev
+            Login</a>
+        <a href="/loginOrganization" class="list-group-item bg-dark text-white border-0 align-self-center mt-4"> Org
+            Login </a>
+    </div>
+</nav>
+
+<!--  END NAV BAR    -->
+
+
+<!-- SECTION: For displaying messages to users -->
+
+<body>
+
+    <div class="errorMessages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages: %}
+
+        {% for category, message in messages: %}
+
+        <div class="alert alert-{{category}} alert-dismissible fade in messageOut">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Important info!</strong> {{message}}.
+        </div>
+
+        {% endfor %}
+
+        {% endif %}
+
+        {% endwith %}
+    </div>
+
+    <!--   END SECTION     -->
+
+    <!--   MAIN SECTION: Register options      -->
+
+
+    <div class="bgRegister">
+
+        <div class="container-fluid d-flex flex-row">
+
+            <div class="devFrm col-12">
+
+
+                <form action="/organization/create" method="POST" class="bg-dark px-5 frmMedia">
+                    <input type="hidden" id="frmIdentifier" value=3>
+
+                    <h1 class="text-white text-center py-3">Organization Sign Up</h1>
+                    <label for="orgName" class="form-label text-white">Organization Name: </label>
+                    <input type="text" id="orgName" name="orgName" class="form-control mb-3">
+                    <label for="orgFirstname" class="form-label text-white">First Name: </label>
+                    <input type="text" id="orgFirstname" name="orgFirstname" class="form-control mb-3">
+                    <label for="orgLastname" class="form-label text-white">Last Name: </label>
+                    <input type="text" id="orgLastname" name="orgLastname" class="form-control mb-3">
+                    <label for="orgEmail" class="form-label text-white">Contact Email: </label>
+                    <input type="text" id="orgEmail" name="orgEmail" class="form-control mb-3">
+                    <label for="orgAddress" class="form-label text-white">Address: </label>
+                    <input type="text" id="orgAddress" name="orgAddress" class="form-control mb-3">
+                    <div class="d-flex align-items-center pt-3">
+                        <label for="city" class="form-label text-white mr-2">City: </label>
+                        <input type="text" id="cityInput" name="orgCity" class="form-control mb-3 mr-2">
+                        <label for="state" class="form-label text-white mr-2">State:</label>
+                        <select class="form-select form-select-lg mb-3 selectState" name="orgState">
+                            <option value="Miami">MI</option>
+                            <option value="Texas">TX</option>
+                            <option value="New York">NY</option>
+                        </select>
+                    </div>
+                    <label for="password" class="form-label text-white">Password: </label>
+                    <input type="password" id="password" name="password" class="form-control mb-3">
+                    <small class="text-white float-right" id="showPassRegister" class="show">Show</small>
+                    <label for="confpass" class="form-label text-white">Confirm Password: </label>
+                    <input type="password" id="confpass" name="confpass" class="form-control mb-3">
+                    <small class="text-white float-right" id="showConfPassRegister" class="show">Show</small>
+                    <button type="submit" class="btn btn-primary my-4">Register</button>
+
+                    <div class="d-flex flex-row justify-content-center pb-4">
+                        <a href="/" class="text-white">Need to Sign Up as a Developer?</a>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!--       END OF MAIN SECTION     -->
+    <script src="{{ url_for('static', filename='./js/script.js') }}"></script>
+</body>
+
+</html>
